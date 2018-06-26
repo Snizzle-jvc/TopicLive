@@ -1,1 +1,7 @@
-topiclive.test.js
+# NodeJS
+node_modules/
+package-lock.json
+
+# Temp build file
+build.js
+build.js.map

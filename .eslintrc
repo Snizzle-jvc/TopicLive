@@ -1,7 +1,22 @@
 {
-  "env": {
-    "browser": true,
-    "jquery": true,
-    "greasemonkey": true
-    }
+	"extends": "eslint:recommended",
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"jquery": true
+	},
+	"globals": {
+		"id_topic": true,
+		"modal": true,
+		"TL": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 9,
+		"sourceType": "module"
+	},
+	"rules": {
+		"no-console": 0,
+		"no-unused-vars": 1
+	}
 }
