@@ -1,4 +1,5 @@
 import TopicLive from './TopicLive.js';
+const $ = require('ddd-jquery');
 
 class Message {
     constructor($message) {
@@ -20,7 +21,7 @@ class Message {
     }
 
     afficher() {
-        TopicLive.log(`Affichage du message ${this.id_message}`);
+        console.log(`Affichage du message ${this.id_message}`);
         this.$message.hide();
         this.fixBlacklist();
         this.fixCitation();
@@ -61,7 +62,7 @@ class Message {
     }
 
     fixCitation() {
-        TopicLive.log(`Obtention de la citation du message ${this.id_message}`);
+        console.log(`Obtention de la citation du message ${this.id_message}`);
         this.$message.find('.bloc-options-msg .picto-msg-quote').on('click', () => {
             $.ajax({
                 type: 'POST',
@@ -74,7 +75,7 @@ class Message {
                 dataType: 'json',
                 timeout: 5000,
                 success: e => {
-                    TopicLive.log(`Citation du message ${this.id_message} recue avec succes`);
+                    console.log(`Citation du message ${this.id_message} recue avec succes`);
                     const $msg = TopicLive.formu.obtenirMessage();
                     let nvmsg = `> Le ${this.date} ${this.pseudo} a écrit :\n>`;
                     nvmsg += `${e.txt.split('\n').join('\n> ')}\n\n`;
@@ -105,7 +106,7 @@ class Message {
 
     // Change le CSS du message pour indiquer qu'il est supprime
     supprimer() {
-        TopicLive.log(`Alerte suppression du message ${this.id_message}`);
+        console.log(`Alerte suppression du message ${this.id_message}`);
         if(!this.supprime) {
             this.trouver('.bloc-options-msg').hide();
 
@@ -123,7 +124,7 @@ class Message {
 
     update(nvMessage) {
         if(this.edition == nvMessage.edition) return;
-        TopicLive.log(`Message ${this.id_message} edite : mise a jour`);
+        console.log(`Message ${this.id_message} edite : mise a jour`);
 
         this.edition = nvMessage.edition;
         this.trouver(TopicLive.class_contenu).html(nvMessage.trouver(TopicLive.class_contenu).html());

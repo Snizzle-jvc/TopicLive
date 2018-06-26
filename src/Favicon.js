@@ -1,4 +1,4 @@
-import TopicLive from './TopicLive.js';
+const $ = require('ddd-jquery');
 
 // Code de Spawnkill
 class Favicon {
@@ -6,7 +6,7 @@ class Favicon {
     try {
       this.init();
     } catch(err) {
-      TopicLive.log(`### Erreur init favicon : ${err}`);
+      console.error(`Erreur init favicon : ${err}`);
     }
   }
 
@@ -24,7 +24,7 @@ class Favicon {
     this.image.src = '/favicon.ico';
 
     try { this.maj(''); }
-    catch(err) { TopicLive.log(`### Erreur favicon (init) : ${err}`); }
+    catch(err) { console.error(`Erreur favicon (init) : ${err}`); }
   }
 
   maj(txt) {

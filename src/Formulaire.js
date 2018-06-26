@@ -1,9 +1,10 @@
 import Page from './Page.js';
 import TopicLive from './TopicLive.js';
+const $ = require('ddd-jquery');
 
 class Formulaire {
   constructor() {
-    // TopicLive.log('Nouveau formulaire.');
+    // console.log('Nouveau formulaire.');
     this.hook();
   }
 
@@ -23,7 +24,7 @@ class Formulaire {
     if(typeof e !== 'undefined' && typeof e.errors !== 'undefined' && e.errors.length) {
       this.afficherErreurs(e.erreurs);
     } else {
-      TopicLive.log('Message valide. Envoi en cours');
+      console.log('Message valide. Envoi en cours');
       this.trouver('.btn-poster-msg').attr('disabled', 'disabled');
       this.trouver('.conteneur-editor').fadeOut();
 
@@ -51,7 +52,7 @@ class Formulaire {
               
               // Redirection via JSON (wtf)
               if(data.redirect_uri) {
-                TopicLive.log(`Redirection du formulaire vers ${data.redirect_uri}`);
+                console.log(`Redirection du formulaire vers ${data.redirect_uri}`);
                 TopicLive.url = data.redirect_uri;
                 TopicLive.GET().then(() => this.verifEnvoi());
               }
@@ -87,7 +88,7 @@ class Formulaire {
   }
 
   maj($nvform) {
-    TopicLive.log('Mise a jour du formulaire');
+    console.log('Mise a jour du formulaire');
     const $form = this.obtenirFormulaire();
     const $cap = this.obtenirCaptcha($form);
     const $ncap = this.obtenirCaptcha($nvform);
@@ -140,7 +141,7 @@ class Formulaire {
   }
 
   verifMessage() {
-    TopicLive.log('Verification du message avant envoi');
+    console.log('Verification du message avant envoi');
 
     if(TopicLive.estMP) {
       this.envoyer();

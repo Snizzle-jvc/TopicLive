@@ -2,17 +2,17 @@ import Favicon from './Favicon.js'
 import Formulaire from './Formulaire.js'
 import Page from './Page.js'
 import TLOption from './Option.js'
+const $ = require('ddd-jquery');
 
 class TopicLive {
   constructor() {
-    this.log('Initialisation');
+    console.log('Initialisation');
     this.instance = 0;
     this.ongletActif = true;
     this.favicon = new Favicon();
     this.son = new Audio('https://raw.githubusercontent.com/kiwec/TopicLive/master/notification.ogg');
 
     this.suivreOnglets();
-    this.init();
     addEventListener('instantclick:newpage', () => this.init());
 
     $("head").append("<style type='text/css'>\
@@ -30,7 +30,7 @@ class TopicLive {
 
   charger() {
     if(this.oldInstance != this.instance) {
-      this.log('Nouvelle instance detectee : arret du chargement');
+      console.log('Nouvelle instance detectee : arret du chargement');
       return;
     }
     
@@ -40,7 +40,7 @@ class TopicLive {
   // Sera initialise a chaque changement de page
   init() {
     if(typeof $ === 'undefined') {
-      return this.log('### jQuery introuvable !');
+      return console.log('### jQuery introuvable !');
     }
 
     this.instance++;
@@ -64,7 +64,7 @@ class TopicLive {
     //    non supportées (ex. GTA)
     const analysable = (document.URL.match(/\/forums\//) || document.URL.match(/\/messages-prives\//));
     if(analysable && $(this.class_msg).length > 0) {
-      this.log('TopicLive actif sur cette page.');
+      console.log('TopicLive actif sur cette page.');
       this.page = new Page($(document));
       this.formu = new Formulaire();
       this.messages = this.page.obtenirMessages();
@@ -72,7 +72,7 @@ class TopicLive {
       this.page.scan();
       this.loop();
     } else {
-      this.log('TopicLive sera inactif sur cette page');
+      console.log('TopicLive sera inactif sur cette page');
     }
   }
 
@@ -90,15 +90,11 @@ class TopicLive {
   alert(message) {
     try {
       modal('erreur', { message });
-      this.log(message);
+      console.log(message);
     } catch(err) {
-      this.log('### Fonction modal() inaccessible');
+      console.log('### Fonction modal() inaccessible');
       alert(message);
     }
-  }
-
-  log(message) {
-    console.log(`[TopicLive] ${message}`);
   }
 
   loop() {
@@ -122,7 +118,7 @@ class TopicLive {
 
     // Si le bouton page suivante est present
     if($bouton.length > 0) {
-      this.log('Nouvelle URL (loop)');
+      console.log('Nouvelle URL (loop)');
       this.messages = [];
       if($bouton.prop('tagName') == 'A') {
         this.url = $bouton.attr('href');
@@ -131,7 +127,7 @@ class TopicLive {
       }
       // Si la page n'est pas la meme (ex. post d'un message sur nouvelle page)
     } else if(testUrl[3] != numPage) {
-      this.log('Nouvelle URL (formulaire)');
+      console.log('Nouvelle URL (formulaire)');
       this.messages = [];
       testUrl[3] = numPage;
       this.url = testUrl.join('-');
@@ -167,7 +163,7 @@ class TopicLive {
         timeout: 5000,
         success: data => {
           if(this.oldInstance != this.instance) {
-            this.log('Nouvelle instance detectee : arret du chargement');
+            console.log('Nouvelle instance detectee : arret du chargement');
             return;
           }
       

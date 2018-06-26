@@ -1,2 +1,4 @@
 import TopicLive from './TopicLive.js';
-TopicLive.log('TopicLive initialisé !');
+
+TopicLive.init();
+console.log('TopicLive initialisé !');

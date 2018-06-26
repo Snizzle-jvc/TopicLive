@@ -1,3 +1,5 @@
+const $ = require('ddd-jquery');
+
 class TLOption {
   constructor(nom, id) {
     this.actif = localStorage[id] == 'true';
