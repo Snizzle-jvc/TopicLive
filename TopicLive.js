@@ -115,7 +115,7 @@ TopicLive.prototype.loop = function()
 {
   if(typeof this.idanalyse !== 'undefined') window.clearTimeout(this.idanalyse);
 
-  var duree = this.ongletActif ? 5000 : 10000;
+  var duree = this.ongletActif ? 1000 : 10000;
 
   if(this.mobile)
     duree = 10000;
