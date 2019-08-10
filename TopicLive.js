@@ -177,7 +177,7 @@ TopicLive.prototype.GET = function(cb, err)
   $.ajax({
     type: 'GET',
     url: this.url,
-    timeout: 5000,
+    timeout: 2000,
     success: (function(data) {
       if(this.oldInstance != this.instance) {
         this.log('Nouvelle instance detectee : arret du chargement');
